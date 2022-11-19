@@ -19,12 +19,14 @@ class RoleSeeder extends Seeder
         $admin = Role::create(['name' => 'Admin']);
         $teacher = Role::create(['name' => 'Teacher']);
 
+        //views
         Permission::create(['name' => 'view.subjects'])->syncRoles([$admin]);
         Permission::create(['name' => 'view.my-subject'])->syncRoles([$teacher]);
         Permission::create(['name' => 'view.users'])->syncRoles([$admin]);
         Permission::create(['name' => 'view.config'])->syncRoles([$admin, $teacher]);
         
 
+        //actions
         Permission::create(['name' => 'subjects.index'])->syncRoles([$admin]);
         Permission::create(['name' => 'students.index'])->syncRoles([$admin]);
         

@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
+use App\Models\Subject_has_student;
 use App\Models\User;
-use App\Models\student_has_subject;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class StudentHasSubjectPolicy
+class SubjectHasStudentPolicy
 {
     use HandlesAuthorization;
 
@@ -25,10 +25,10 @@ class StudentHasSubjectPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\student_has_subject  $studentHasSubject
+     * @param  \App\Models\Subject_has_student  $subjectHasStudent
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, student_has_subject $studentHasSubject)
+    public function view(User $user, Subject_has_student $subjectHasStudent)
     {
         //
     }
@@ -48,10 +48,10 @@ class StudentHasSubjectPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\student_has_subject  $studentHasSubject
+     * @param  \App\Models\Subject_has_student  $subjectHasStudent
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, student_has_subject $studentHasSubject)
+    public function update(User $user, Subject_has_student $subjectHasStudent)
     {
         //
     }
@@ -60,10 +60,10 @@ class StudentHasSubjectPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\student_has_subject  $studentHasSubject
+     * @param  \App\Models\Subject_has_student  $subjectHasStudent
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, student_has_subject $studentHasSubject)
+    public function delete(User $user, Subject_has_student $subjectHasStudent)
     {
         //
     }
@@ -72,10 +72,10 @@ class StudentHasSubjectPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\student_has_subject  $studentHasSubject
+     * @param  \App\Models\Subject_has_student  $subjectHasStudent
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, student_has_subject $studentHasSubject)
+    public function restore(User $user, Subject_has_student $subjectHasStudent)
     {
         //
     }
@@ -84,10 +84,10 @@ class StudentHasSubjectPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\student_has_subject  $studentHasSubject
+     * @param  \App\Models\Subject_has_student  $subjectHasStudent
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, student_has_subject $studentHasSubject)
+    public function forceDelete(User $user, Subject_has_student $subjectHasStudent)
     {
         //
     }

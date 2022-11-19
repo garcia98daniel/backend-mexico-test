@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\student_has_subject;
-use App\Http\Requests\Storestudent_has_subjectRequest;
-use App\Http\Requests\Updatestudent_has_subjectRequest;
+use App\Models\Subject_has_student;
+use App\Http\Requests\StoreSubject_has_studentRequest;
+use App\Http\Requests\UpdateSubject_has_studentRequest;
 
-class StudentHasSubjectController extends Controller
+class SubjectHasStudentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -31,10 +31,10 @@ class StudentHasSubjectController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Storestudent_has_subjectRequest  $request
+     * @param  \App\Http\Requests\StoreSubject_has_studentRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Storestudent_has_subjectRequest $request)
+    public function store(StoreSubject_has_studentRequest $request)
     {
         //
     }
@@ -42,10 +42,10 @@ class StudentHasSubjectController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\student_has_subject  $student_has_subject
+     * @param  \App\Models\Subject_has_student  $subject_has_student
      * @return \Illuminate\Http\Response
      */
-    public function show(student_has_subject $student_has_subject)
+    public function show(Subject_has_student $subject_has_student)
     {
         //
     }
@@ -53,10 +53,10 @@ class StudentHasSubjectController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\student_has_subject  $student_has_subject
+     * @param  \App\Models\Subject_has_student  $subject_has_student
      * @return \Illuminate\Http\Response
      */
-    public function edit(student_has_subject $student_has_subject)
+    public function edit(Subject_has_student $subject_has_student)
     {
         //
     }
@@ -64,11 +64,11 @@ class StudentHasSubjectController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Updatestudent_has_subjectRequest  $request
-     * @param  \App\Models\student_has_subject  $student_has_subject
+     * @param  \App\Http\Requests\UpdateSubject_has_studentRequest  $request
+     * @param  \App\Models\Subject_has_student  $subject_has_student
      * @return \Illuminate\Http\Response
      */
-    public function update(Updatestudent_has_subjectRequest $request, student_has_subject $student_has_subject)
+    public function update(UpdateSubject_has_studentRequest $request, Subject_has_student $subject_has_student)
     {
         //
     }
@@ -76,10 +76,10 @@ class StudentHasSubjectController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\student_has_subject  $student_has_subject
+     * @param  \App\Models\Subject_has_student  $subject_has_student
      * @return \Illuminate\Http\Response
      */
-    public function destroy(student_has_subject $student_has_subject)
+    public function destroy(Subject_has_student $subject_has_student)
     {
         //
     }
