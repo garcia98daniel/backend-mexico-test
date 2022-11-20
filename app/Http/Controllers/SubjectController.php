@@ -27,6 +27,13 @@ class SubjectController extends Controller
                     $subjects = User_has_subject::with('subjects.studentsPivot.student')
                     ->where('user_id', '=', auth()->user()->id)
                     ->first()->subjects;
+                }else{
+                    $response = [
+                        'data' => null,
+                        'message' => "no tienes permisos para ejecutar esta accion",
+                    ];
+
+                    return response($response , 401);
                 }
 
                     if(isset($subjects)){
