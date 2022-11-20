@@ -28,6 +28,7 @@ Route::group(["middleware" => "auth:sanctum"] , function () {
     Route::get('/reports', [SubjectController::class, 'index'])->middleware('can:subjects.index');
 
     Route::get('/users', [UserController::class, 'index'])->middleware('can:users.index');
+    Route::post('/users/create', [UserController::class, 'store'])->middleware('can:users.create');
     Route::delete('/users/delete/{id}', [UserController::class, 'destroy'])->middleware('can:users.delete');
 
     // Route::get('/logout', [UserController::class, 'logout'])->middleware('can:users.index');
