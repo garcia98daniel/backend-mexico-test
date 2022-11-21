@@ -7,6 +7,8 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use App\Models\User_has_subject;
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -134,6 +136,11 @@ class DatabaseSeeder extends Seeder
             'email' => $email,
             'password' =>  bcrypt($password),
         ])->assignRole($teacher);
+
+        User_has_subject::factory()->create([
+            'user_id' => 2,
+            'subject_id' => 1,
+        ]);
 
         $this->call(StudentSeeder::class);
     }

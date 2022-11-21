@@ -196,4 +196,53 @@ class UserController extends Controller
             return response($response , 500);
         }
     }
+
+    public function updateProfile(Request $request)
+    {
+        try {
+            $data = json_decode($request->getContent(), true);
+            $request = new Request($data);
+
+            $fields = $request->validate([
+                "user" => "required|string",
+                "name" => "required|string",
+                "email" => "required|string|email|unique:users,email",
+                "password" => "required|string"
+            ]);
+
+            $userUpdate = User::where("id", auth()->user()->id )->update([
+                "user" => $request->user,
+                "name" => $request->name,
+                "email" => $request->email,
+                "password" => bcrypt($request->password)
+            ]);
+
+            if($userUpdate){
+                $user = User::where("id", auth()->user()->id)->with('roles')->first();
+                $user->getPermissionsViaRoles();
+
+                $response = [
+                    'data' => $user,
+                    'message' => "datos actualizados con éxito.",
+                ];
+                
+                return response($response, 200);
+            }
+            
+            $response = [
+                'data' => null,
+                'error' => "Ups!, error al actualizar datos."
+            ];
+            
+            return response($response, 404);
+
+        } catch (QueryException $exception) {
+            $response = [
+                'error' =>  $exception->getMessage(),
+                'message' => "Error al actualizar datos.",
+            ];
+
+            return response($response , 500);
+        }
+    }
 }
