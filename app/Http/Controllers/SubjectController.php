@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Subject;
+use App\Models\User_has_subject;
 use App\Http\Requests\StoreSubjectRequest;
 use App\Http\Requests\UpdateSubjectRequest;
 
@@ -15,7 +16,44 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        //
+        // $data = json_decode($request->getContent(), true);
+        // $request = new Request($data);
+        try {
+                // error_log(auth()->user()->hasRole('admin'));
+
+                if(auth()->user()->hasRole('admin')){    
+                    $subjects = Subject::with('studentsPivot.student')->get();
+                }else if(auth()->user()->hasRole('teacher')){
+                    $subjects = User_has_subject::with('subjects.studentsPivot.student')
+                    ->where('user_id', '=', auth()->user()->id)
+                    ->first()->subjects;
+                }
+
+                    if(isset($subjects)){
+                        $response = [
+                            'data' => $subjects,
+                            'message' => "Programas listados",
+                        ];
+            
+                        return response($response, 200);
+                    }
+
+                    $response = [
+                        'data' => null,
+                        'message' => $subjects,
+                    ];
+
+                    return response($response , 200);
+                
+                
+        } catch (QueryException $exception) {
+                    $response = [
+                        'message' => "Error al intentar obtener programas y estudiantes",
+                        'error' => $exception->getMessage(),
+                    ];
+
+                    return response($response , 500);
+        }
     }
 
     /**

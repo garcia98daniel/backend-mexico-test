@@ -13,6 +13,11 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
     use HasRoles;
 
+    public function subjectPivot()
+    {
+        return $this->hasMany(Subject_has_student::class);
+    }
+
     protected $guard_name = 'api';
     
     /**

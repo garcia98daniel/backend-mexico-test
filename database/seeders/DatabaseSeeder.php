@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
         
 
         // //actions
-        // $Permission5 = Permission::create(['name' => 'subjects.index'])->syncRoles([$admin]);
+        // $Permission5 = Permission::create(['name' => 'subjects.index'])->syncRoles([$admin, teacher]);
         // $Permission6 = Permission::create(['name' => 'students.index'])->syncRoles([$admin]);
         
         // $Permission7 = Permission::create(['name' => 'users.index'])->syncRoles([$admin]);
@@ -38,7 +38,7 @@ class DatabaseSeeder extends Seeder
         $teacher = Role::create(['name' => 'teacher']);
 
         $permission1 = Permission::create(['name' => 'view.subjects']);
-        $permission2 = Permission::create(['name' => 'view.my-subject']);
+        // $permission2 = Permission::create(['name' => 'view.my-subject']);
         $permission3 = Permission::create(['name' => 'view.users']);
         $permission4 = Permission::create(['name' => 'view.config']);
         
@@ -59,6 +59,12 @@ class DatabaseSeeder extends Seeder
             $permission1, $permission3, $permission4,
             $permission5, $permission6, $permission7,
             $permission8, $permission9, $permission10,
+            $permission11
+        ]);
+
+        $teacher->syncPermissions([
+            $permission4, 
+            $permission5, $permission10, 
             $permission11
         ]);
 

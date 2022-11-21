@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SubjectController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +25,8 @@ Route::post('/login', [AuthController::class, 'login']);
 
 
 Route::group(["middleware" => "auth:sanctum"] , function () {
-    Route::get('/reports', [UserController::class, 'getSubjectsWithStudents'])->middleware('can:users.index');
-    Route::get('/logout', [UserController::class, 'logout'])->middleware('can:users.index');
-    Route::get('/logout', [UserController::class, 'logout'])->middleware('can:users.index');
+    Route::get('/reports', [SubjectController::class, 'index'])->middleware('can:subjects.index');
+
+    // Route::get('/logout', [UserController::class, 'logout'])->middleware('can:users.index');
+    // Route::get('/logout', [UserController::class, 'logout'])->middleware('can:users.index');
 });
