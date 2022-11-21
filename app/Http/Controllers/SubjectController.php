@@ -19,11 +19,11 @@ class SubjectController extends Controller
         // $data = json_decode($request->getContent(), true);
         // $request = new Request($data);
         try {
-                // error_log(auth()->user()->hasRole('admin'));
+                error_log(auth()->user()->hasRole('teacher'));
 
                 if(auth()->user()->hasRole('admin')){    
                     $subjects = Subject::with('studentsPivot.student')->get();
-                }else if(auth()->user()->hasRole('teacher')){
+                }elseif(auth()->user()->hasRole('teacher')){
                     $subjects = User_has_subject::with('subjects.studentsPivot.student')
                     ->where('user_id', '=', auth()->user()->id)
                     ->first()->subjects;
@@ -56,6 +56,34 @@ class SubjectController extends Controller
         } catch (QueryException $exception) {
                     $response = [
                         'message' => "Error al intentar obtener programas y estudiantes",
+                        'error' => $exception->getMessage(),
+                    ];
+
+                    return response($response , 500);
+        }
+    }
+
+    public function getSubjects(){
+        try {
+            $subjects = Subject::all();
+                if(isset($subjects)){
+                    $response = [
+                        'data' => $subjects,
+                        'message' => "Programas listados",
+                    ];
+        
+                    return response($response, 200);
+                }
+
+                $response = [
+                    'data' => null,
+                    'message' => "no hay programas para listar",
+                ];
+
+                return response($response , 200);
+        } catch (QueryException $exception) {
+                    $response = [
+                        'message' => "Error al intentar obtener programas.",
                         'error' => $exception->getMessage(),
                     ];
 

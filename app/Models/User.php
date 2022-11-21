@@ -15,7 +15,7 @@ class User extends Authenticatable
 
     public function subjectPivot()
     {
-        return $this->hasMany(Subject_has_student::class);
+        return $this->hasMany(User_has_subject::class);
     }
 
     protected $guard_name = 'api';

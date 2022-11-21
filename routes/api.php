@@ -26,10 +26,11 @@ Route::post('/login', [AuthController::class, 'login']);
 
 Route::group(["middleware" => "auth:sanctum"] , function () {
     Route::get('/reports', [SubjectController::class, 'index'])->middleware('can:subjects.index');
+    Route::get('/subjects', [SubjectController::class, 'getSubjects']);
 
     Route::get('/users', [UserController::class, 'index'])->middleware('can:users.index');
     Route::post('/users/create', [UserController::class, 'store'])->middleware('can:users.create');
     Route::delete('/users/delete/{id}', [UserController::class, 'destroy'])->middleware('can:users.delete');
-
-    // Route::get('/logout', [UserController::class, 'logout'])->middleware('can:users.index');
+    Route::get('/me', [UserController::class, 'profile'])->middleware('can:config.index');
+    Route::patch('/me/edit', [UserController::class, 'updateProfile'])->middleware('can:config.edit');
 });
