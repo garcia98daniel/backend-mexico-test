@@ -138,6 +138,8 @@ class UserController extends Controller
             }
 
             if($user){
+                $user->getRoleNames();
+                $user->getPermissionsViaRoles();
                 $response = [
                     'data' => $user,
                     'message' => 'Usuario creado con exito',
@@ -200,14 +202,14 @@ class UserController extends Controller
     public function updateProfile(Request $request)
     {
         try {
-            $data = json_decode($request->getContent(), true);
-            $request = new Request($data);
+            // $data = json_decode($request->getContent(), true);
+            // $request = new Request($data);
 
             $fields = $request->validate([
                 "user" => "required|string",
                 "name" => "required|string",
                 "email" => "required|string|email|unique:users,email",
-                "password" => "required|string"
+                "password" => "required"
             ]);
 
             $userUpdate = User::where("id", auth()->user()->id )->update([
@@ -218,7 +220,7 @@ class UserController extends Controller
             ]);
 
             if($userUpdate){
-                $user = User::where("id", auth()->user()->id)->with('roles')->first();
+                $user = User::where("id", auth()->user()->id)->with('roles')->with('subjectPivot.subjects')->first();
                 $user->getPermissionsViaRoles();
 
                 $response = [

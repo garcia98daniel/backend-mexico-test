@@ -23,7 +23,7 @@ class AuthController extends Controller
             ]);
 
             // Check user
-            $user = User::where('user', $fields['user'])->first();
+            $user = User::where('user', $fields['user'])->with('subjectPivot.subjects')->first();
 
             // Check password
             if(!$user || !Hash::check($fields['password'], $user->password)) {
@@ -32,9 +32,6 @@ class AuthController extends Controller
                 ], 401);
             }
             
-            // if (!$user->hasPermissionTo('admin')) {
-            //     $user->givePermissionTo('admin');
-            // }
             $user->getRoleNames();
             $user->getPermissionsViaRoles();
             $token = $user->createToken('myapptoken')->plainTextToken;
